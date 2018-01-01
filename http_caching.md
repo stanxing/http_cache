@@ -70,6 +70,7 @@ files: /js/demo.js,/css/demo.css
 ### 其他
 - no-store： 缓存不应存储有关客户端请求或服务器响应的任何内容，即禁用缓存
 - no-transform： 服务端指令，不得对资源进行转换或转变。Content-Encoding, Content-Range, Content-Type等HTTP头不能由代理修改。例如，非透明代理可以对图像格式进行转换，以便节省缓存空间或者减少缓慢链路上的流量。 no-transform指令不允许这样做
+[slide]
 
 [slide]
 ## 主页面样式
