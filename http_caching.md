@@ -38,7 +38,7 @@ files: /js/demo.js,/css/demo.css
     - Cache-Control: max-age=<seconds>
     - Cache-Control: max-stale[=<seconds>]
     - Cache-Control: min-fresh=<seconds>
-    - Cache-control: no-cache 
+    - Cache-control: no-cache
     - Cache-control: no-store
     - Cache-control: no-transform
     - Cache-control: only-if-cached
@@ -71,12 +71,26 @@ files: /js/demo.js,/css/demo.css
 - no-store： 缓存不应存储有关客户端请求或服务器响应的任何内容，即禁用缓存
 - no-transform： 服务端指令，不得对资源进行转换或转变。Content-Encoding, Content-Range, Content-Type等HTTP头不能由代理修改。例如，非透明代理可以对图像格式进行转换，以便节省缓存空间或者减少缓慢链路上的流量。 no-transform指令不允许这样做
 [slide]
+# 协商缓存
+## Last-Modified/If-Modified-Since
+- Last-Modified 是一个响应首部，其中包含源头服务器认定的资源做出修改的日期及时间。它通常被用作一个验证器来判断接收到的或者存储的资源是否彼此一致。由于精确度比 ETag 要低，所以这是一个备用机制。
+- If-Modified-Since 是一个条件式请求首部，服务器只在所请求的资源在给定的日期时间之后对内容进行过修改的情况下才会将资源返回，状态码为 200。
+- 如果请求的资源从那时起未经修改，那么返回一个不带有消息主体的 304 响应，而在 Last-Modified 首部中会带有上次修改时间。If-Modified-Since 只可以用在 GET 或 HEAD 请求中。
+[slide]
+# 协商缓存
+## Etag/If-None-Match
+- ETag 是一个响应首部，是资源的特定版本的标识符，当资源更新更新时，一定要返回一个新的ETag值，它也是被用来作为一个验证器去判断接收到的资源是否是最新的，它的精确度比 Last-Modified 要高。
+- If-None-Match 是一个条件式请求首部。对于 GET 和 HEAD 请求方法来说，当且仅当服务器上没有任何资源的 ETag 属性值与这个首部中列出的相匹配的时候，服务器端会才返回所请求的资源，响应码为 200。
+- 对于 GET 和 HEAD 方法来说，当验证失败的时候，服务器端必须返回响应码 304 （Not Modified，未改变）
+- 对于能够引发服务器状态改变的方法（比如 POST ），则返回 412 （Precondition Failed，前置条件失败）
+- 当与 If-Modified-Since 一同使用的时候，If-None-Match 优先级更高
+[slide]
+# 缓存控制
+## 新鲜度
 
 [slide]
-## 主页面样式
-### ----是上下分界线
-----
-
-nodeppt是基于nodejs写的支持 **Markdown!** 语法的网页PPT，当前版本：1.4.5
-
-Github：https://github.com/ksky521/nodeppt
+# 缓存控制
+# 缓存验证规则
+[slide]
+![]
+[slide]
